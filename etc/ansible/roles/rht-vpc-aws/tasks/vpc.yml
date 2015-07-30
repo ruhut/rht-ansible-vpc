@@ -1,0 +1,19 @@
+---
+- name: Subnets creation on rht-vpc
+  ec2_vpc:
+    state: present
+    cidr_block: "{{ VPC_CIDR }}"
+    region: "{{ VPC_REGION }}"
+    resource_tags: { "Name": "vpc-rht" }
+    subnets:
+      - cidr: 172.30.0.0/24
+        az: us-east-1a
+        resource_tags: { "Name": "rht-pub-1a", "Scope": "public" }
+      - cidr: 172.30.1.0/24
+        az: us-east-1b
+        resource_tags: { "Name": "rht-pub-1b", "Scope": "public" }
+      - cidr: 172.30.4.0/24
+        az: us-east-1a
+        resource_tags: { "Name": "rht-priv-1a", "Scope": "private" }
+    internet_gateway: True
+  register: vpc

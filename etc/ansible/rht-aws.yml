@@ -1,0 +1,9 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  vars:
+    VPC_CIDR: 172.30.0.0/16
+    VPC_REGION: us-east-1
+  roles:
+    - rht-vpc-aws
